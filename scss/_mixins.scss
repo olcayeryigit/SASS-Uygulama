@@ -1,0 +1,57 @@
+//@use "./variables" as v;
+@mixin reset-list($m: 0, $p: 0) {
+  //margin padding de parametre olarak verelim gönderilmezse 0 versin
+  list-style-type: none;
+  margin: $m;
+  padding: $p;
+}
+
+@mixin border-radius($val) {
+  border-radius: $val;
+}
+
+//filigran
+@mixin watermark($color, $opacity: 0.5) {
+  //opacity verilmemişse 0.5 alsın
+  background-color: $color;
+  opacity: $opacity;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@mixin flex($fd: row, $jc: space-between, $ai: stretch, $gap: 0, $fw: wrap) {
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+  gap: $gap;
+  flex-wrap: $fw;
+}
+//shadowların çeşitleri var text ve box shadow
+//interpolation
+@mixin shadow($type, $val) {
+  #{$type}-shadow: $val;
+}
+
+//if -shadow-örnek
+//@mixin shadow($type,$val){
+   // @if $type=box{
+//box-shadow: $val;
+    //}@else{
+      //  text-shadow: $val;
+   // }
+//}
+
+
+
+
+//@mixin border-radius($val) {
+   // vendors each döngü
+    //@each $vendor in v.$vendors {
+    //  #{$vendor}border-radius : $val;
+    //}
+ // }
+ 

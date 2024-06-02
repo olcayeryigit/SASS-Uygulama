@@ -1,0 +1,124 @@
+@use "./variables" as v; //as: alians
+@use "./mixins" as m;
+@use "./common";
+
+.weather-card {
+  background-color: v.$color1;
+  color: v.$color4;
+  border-radius: 20px;
+  @include m.flex();
+  @include m.border-radius(20px);
+
+  .panel-start {
+    background-image: v.$card-bg-img;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    position: relative;
+    @include m.border-radius(20px);
+    @include m.flex($fd: column,$gap:30px);
+
+    padding: 20px;
+    flex: 1 0 250px; //grow-shrink-base witdh
+    &::before {
+      content: "";
+      @include m.watermark(v.$color1, 0.45);
+      @include m.border-radius(20px);
+      z-index: 0;
+    }
+
+    h2,
+    h3,
+    h4,
+    h5 {
+      margin: 0;
+@include m.shadow(text,  0 0 3px v.$color5);
+     }
+
+    .date,
+    .temp {
+      position: relative; //position vermediğimizde-static
+      //position static z index almaz, o sebeple relative yaptık
+      z-index: 1;
+    }
+    .date {
+      h2 {
+        font-size: 2rem;
+        margin: -5px 0;
+      }
+
+      h4 {
+        font-size: 0.7rem;
+        font-weight: 400;
+      }
+    }
+
+    .temp {
+      h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        margin: -10px;
+      }
+
+      h4 {
+        font-size: 0.7rem;
+        font-weight: 400;
+      }
+    }
+  }
+
+  
+
+  .panel-end {
+    flex:6 0 300px; //grow-shrink-base witdh
+    //burada flex-bases sınırlarına ulaştığında aşağı kayar
+    padding: 20px;
+    @include m.flex($fd: column, $gap: 30px);
+    .status,
+    .days {
+      @include m.reset-list(/*0,0*/);
+    }
+
+    .status {
+      line-height: 25px;
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        span {
+          &:first-child {
+            font-size: 1.4rem;
+          }
+
+          &:nth-child(2) {
+            font-size: 0.7rem;
+          }
+        }
+      }
+    }
+
+    .days {
+      @include m.flex();
+
+      li {
+        @include m.flex($fd: column, $ai: center);
+
+        padding: 25px;
+
+        &.active {
+          background-color: v.$color4;
+          color: v.$color5;
+          @include m.border-radius(20px);
+          @include m.shadow(box, 0 0 5px v.$color5);
+
+        }
+      }
+    }
+    .btn-change {
+      @extend .btn-base;//miras
+      font-size:0.9rem;
+    }
+  }
+}
